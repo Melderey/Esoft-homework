@@ -1,3 +1,5 @@
+import { CROSS, CIRCLE, GAME_RESET } from "./constants.js";
+
 /*
 0 | 1 | 2
 --+---+--
@@ -44,7 +46,12 @@ class TicTacToe {
 
     const countMovies = this.addCountMovies();
     if (countMovies >= 9) {
-      alert("Game over!");
+      divCongratulation.innerHTML = `<span class="game-over-color">Game over!</span>`;
+
+      for (let i = 0; i < 9; i += 1) {
+        const gameOverField = document.getElementById(`${i}`);
+        gameOverField.className = "game-field_cell game-over-bg";
+      }
     }
 
     return false;
@@ -78,18 +85,14 @@ class TicTacToe {
 let isPlayerOneFirst = true;
 const playerOne = { name: "Alex" };
 const playerTwo = { name: "Also Alex" };
-/*
-Тернарный оператор работает как if...else.
-Сначала идёт условие, потом через "?" результат, если условие истинно и через  ":" результат если ложно
-*/
+
 let game = isPlayerOneFirst
   ? new TicTacToe(playerOne, playerTwo)
   : new TicTacToe(playerTwo, playerOne);
 
-const cross = document.getElementById("cross");
-const circle = document.getElementById("circle");
 const gameField = document.getElementsByClassName("game-field");
 const btnReset = document.getElementsByClassName("reset-button");
+const divCongratulation = document.getElementById("congratulation");
 
 const makeBgColor = (arr) => {
   arr.forEach((element) => {
@@ -108,7 +111,7 @@ try {
         game.makeMove(playerIdx, position);
 
         const div = document.createElement("div");
-        div.innerHTML = isPlayerOneFirst ? "X" : " O";
+        div.innerHTML = isPlayerOneFirst ? CROSS : CIRCLE;
         e.target.append(div);
 
         if (game.checkIsWin(playerIdx)) {
@@ -119,17 +122,7 @@ try {
 
           makeBgColor(game.winPosition);
 
-          /*
-               Шаблонная строка.
-               Позволяет не делать постоянную конкатенацию строк, 
-                если нужно добавить в строку значение переменной
-               Делается с помощью ``-кавычек, в ${} записывается имя переменной, 
-                значение которой нужно подставить
-               */
-
-          const divCongratulation = document.getElementById("congratulation");
           divCongratulation.innerHTML = `<span>Player ${winner} win!</span>`;
-          // alert(`Player ${winner} win!`);
         }
 
         isPlayerOneFirst = !isPlayerOneFirst;
@@ -146,24 +139,15 @@ try {
 
 try {
   Array.from(btnReset, (element) => {
-    element.addEventListener("click", (e) => {
+    element.addEventListener("click", () => {
       game = isPlayerOneFirst
         ? new TicTacToe(playerOne, playerTwo)
         : new TicTacToe(playerTwo, playerOne);
 
       Array.from(gameField, (element) => {
-        element.innerHTML = `<div class="game-field_cell" id="0"></div>
-        <div class="game-field_cell" id="1"></div>
-        <div class="game-field_cell" id="2"></div>
-        <div class="game-field_cell" id="3"></div>
-        <div class="game-field_cell" id="4"></div>
-        <div class="game-field_cell" id="5"></div>
-        <div class="game-field_cell" id="6"></div>
-        <div class="game-field_cell" id="7"></div>
-        <div class="game-field_cell" id="8"></div>`;
+        element.innerHTML = GAME_RESET;
       });
 
-      const divCongratulation = document.getElementById("congratulation");
       divCongratulation.innerHTML = "";
     });
   });
