@@ -22,6 +22,7 @@ class TicTacToe {
   players = [];
   winPosition = [];
   countMovies = 0;
+  isGameWin = false;
 
   constructor(playerOneInfo, playerTwoInfo) {
     this.players = [
@@ -40,6 +41,7 @@ class TicTacToe {
 
       if (isWin) {
         this.setWinPosition(winPosition);
+        this.isGameWin = true;
         return true;
       }
     }
@@ -103,7 +105,11 @@ const makeBgColor = (arr) => {
 
 try {
   Array.from(gameField, (element) => {
-    element.addEventListener("click", (e) => {
+    element.addEventListener("click", function handleClick(e) {
+      if (game.isGameWin) {
+        return;
+      }
+
       if (e.target.childNodes.length === 0) {
         const position = Number(e.target.id);
         const playerIdx = isPlayerOneFirst ? 0 : 1;
