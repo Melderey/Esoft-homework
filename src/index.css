@@ -1,7 +1,11 @@
 #congratulation {
   display: block;
-  color: rgb(92, 223, 92);
+  color: rgb(87, 204, 87);
   text-align: center;
+  margin: 10px auto auto auto;
+  padding: 12px 20px;
+  font-size: 2rem;
+  /* background-color: rgba(44, 57, 121, 0.09); */
 }
 
 .game-field {
@@ -13,6 +17,9 @@
 }
 
 .game-field_cell {
+  display: grid;
+  align-items: center;
+  justify-content: center;
   background: #ffffff;
   border-radius: 12px;
   height: 150px;
@@ -32,4 +39,12 @@
   background: #f7f7f7;
   border-radius: 12px;
   margin: 10px auto auto auto;
+}
+
+.game-over-color {
+  color: rgb(255, 71, 71);
+}
+
+.game-over-bg {
+  background-color: rgba(255, 255, 0, 0.739);
 }
