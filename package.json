@@ -1,0 +1,24 @@
+{
+  "name": "school",
+  "version": "1.0.0",
+  "description": "",
+  "main": "node index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "^8.12.0",
+    "express": "^4.17.3",
+    "knex": "^1.0.5",
+    "md5": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "pm2": "^5.2.0"
+  }
+}
