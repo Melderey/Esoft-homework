@@ -43,11 +43,11 @@ VALUES
 
 INSERT INTO games (player_one_id, player_two_id, RESULT)
 VALUES
-  (1, 2, 'won'),
-  (2, 3, 'lose'),
-  (3, 4, 'draw'),
-  (5, 2, 'won'),
-  (1, 2, 'lose');
+  (1, 2, 1),
+  (2, 3, 1),
+  (3, 4, 3),
+  (5, 2, 2),
+  (1, 2, 1);
 
 ### Переделать таблицу turns так, чтобы избавиться от id хода
 
@@ -61,15 +61,32 @@ CREATE TABLE turns(
 );
 
 ### Написать запрос, который бы собирал информацию о количестве побед/поражений/ничьих пользователя
-### Написать запрос, который бы собирал полную статистику игр пользователя
-### Написать запрос, который бы выводил топ-5 игроков по соотношению побед/поражений/ничьих
+1 - победа,
+2 - поражение,
+3 - ничья.
 
-Как можно посчитать статистику с такой структурой таблицы?
-Пример запроса который выведет количество 'won' в таблице games.
-
-SELECT COUNT(result) AS "Number of winners"
+SELECT COUNT(*) AS "Number of winners"
 FROM games
-WHERE result = 'won';
+WHERE (player_one_id=2 AND RESULT=1::VARCHAR) OR (player_two_id=2 AND RESULT=2::VARCHAR);
 
+### Написать запрос, который бы собирал полную статистику игр пользователя
 
+SELECT * FROM 
+(
+    SELECT COUNT(*) AS "Number of winners"
+    FROM games
+    WHERE (player_one_id=2 AND RESULT=1::VARCHAR) OR (player_two_id=2 AND RESULT=2::VARCHAR)
+) AS "request_1",
+(
+    SELECT count(*) AS "Number of looses"
+    FROM games
+    WHERE (player_one_id=2 AND RESULT=2::VARCHAR) OR (player_two_id=2 AND RESULT=1::VARCHAR)
+) AS "request_2",
+(
+    SELECT count(*) AS "Number of draws"
+    FROM games
+    WHERE (player_one_id=2 AND RESULT=3::VARCHAR) OR (player_two_id=2 AND RESULT=3::VARCHAR)
+) AS "request_3";
+
+### Написать запрос, который бы выводил топ-5 игроков по соотношению побед/поражений/ничьих
 
