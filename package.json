@@ -1,22 +1,20 @@
 {
-  "name": "esoft-homework",
+  "name": "school",
   "version": "1.0.0",
-  "description": "educational project \"Tic-Tac-Toe\"",
-  "main": "index.js",
+  "description": "",
+  "main": "node index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "hah": "echo hahahahah"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Melderey/Esoft-homework.git"
-  },
-  "keywords": [
-    "Tic-Tac-Toe"
-  ],
-  "author": "Melderey",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Melderey/Esoft-homework/issues"
-  },
-  "homepage": "https://github.com/Melderey/Esoft-homework#readme"
+  "dependencies": {
+    "express": "^4.17.3",
+    "knex": "^1.0.5",
+    "md5": "^2.3.0",
+    "pg": "^8.7.3"
+  }
 }
